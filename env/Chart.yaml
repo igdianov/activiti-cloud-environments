@@ -1,4 +1,5 @@
 name: env
+appVersion: 7.0.0.GA
 version: 0.0.1
 description: Activiti Cloud GitOps Environment Chart for this Environment 
 home: "https://activiti.org"
