@@ -2,7 +2,7 @@
 
 The default git repository used when creating new Activiti Cloud GitOps based Environments
 
-### Follow the steps to create new Activiti Cloud GitOps environment for Jenkins-X CI/CD pipelines
+### How to use
 
 1. Get Jx Cluster Domain:
 
