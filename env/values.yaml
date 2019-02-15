@@ -28,3 +28,18 @@ global:
     ## Configure global annotations for all service ingresses, i.e. 
     annotations: 
       certmanager.k8s.io/issuer: letsencrypt-prod
+
+  ## Keycloak configuration
+  keycloak:
+    ## Configure Activiti Keycloak host template, i.e. "activiti-keycloak.{{ .Release.Namespace }}.{{ .Values.global.gateway.domain }}"
+    # if not set, Keycloak Ingress will use gateway host domain, i.e. http(s)://{{ template \"common.gateway-host\" . }}/auth
+    host: ""
+
+    ## Set full url to configure external Keycloak, https://my.keycloak.com/auth
+    # if set, Activiti will use external Keycloak deployment configuration 
+    url: ""
+
+    ## Configure Keycloak realm
+    realm: "activiti"
+    resource: "activiti"
+    client: "activiti"
