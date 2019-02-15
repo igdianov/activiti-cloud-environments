@@ -1,0 +1,9 @@
+name: env
+appVersion: 7.0.0.GA
+version: 0.0.1
+description: Activiti Cloud GitOps Environment Chart for this Environment 
+home: "https://activiti.org"
+maintainers:
+  - name: "Activiti Team"
+    url: https://github.com/activiti
+icon: "https://salaboy.files.wordpress.com/2018/01/acitiviti_icon_fullcolor_github_400x400.png"
