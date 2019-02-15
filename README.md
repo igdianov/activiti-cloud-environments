@@ -2,19 +2,18 @@
 
 The default git repository used when creating new Activiti Cloud GitOps based Environments
 
-### Please, follow the steps to create new Activiti Cloud GitOps environment for Jenkins-X
+### Follow the steps to create new Activiti Cloud GitOps environment for Jenkins-X CI/CD pipelines
 
 1. Get Jx Cluster Domain:
 
 ```
 $ export CLUSTER_DOMAIN="$(kubectl get cm ingress-config -o=go-template --template='{{.data.domain}}' -n jx)"
-
 ```
 
 2. Set CLUSTER_NAME environment variable for the cluster 
 
 ```
-$ export CLUSTER_NAME="CLUSTER_NAME"
+$ export CLUSTER_NAME="....."
 ```
 
 3. Create Activiti Cloud DevOps Environment. 
