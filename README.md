@@ -2,7 +2,7 @@
 
 The default git repository used when creating new Activiti Cloud GitOps based Environments
 
-## Instructions: 
+### Please, follow the steps to create new Activiti Cloud GitOps environment for Jenkins-X
 
 1. Get Jx Cluster Domain:
 
@@ -34,7 +34,7 @@ to set the value of `global.gateway.domain` key from `expose.config.domain` valu
 ```
 expose:
   config:
-    domain: 1.2.3.4.nip.io # <==== Use this value to set global.gateway.domain configuration
+    domain: CLUSTER_DOMAIN # <==== Use this value to set global.gateway.domain configuration
 
 global:
   gateway:
