@@ -33,14 +33,14 @@ to set the value of `global.gateway.domain` key from `expose.config.domain` valu
 ```
 expose:
   config:
-    domain: CLUSTER_DOMAIN # <==== Use this value to set global.gateway.domain configuration
+    domain: 1.2.3.4.nip.io # <==== Use this value to set global.gateway.domain configuration
 
 global:
   gateway:
     annotations:
       certmanager.k8s.io/issuer: letsencrypt-prod
 
-    domain: REPLACEME # <=== Set value from expose.config.domain key
+    domain: REPLACEME # <=== Set value from expose.config.domain key, i.e. 1.2.3.4.nip.io
 
     host: activiti-cloud-gateway.{{ .Release.Namespace }}.{{ .Values.global.gateway.domain }}
     http: true
