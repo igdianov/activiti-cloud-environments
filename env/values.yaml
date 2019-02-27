@@ -15,31 +15,52 @@ cleanup:
 
 # Activiti Cloud DevOps Environment configuration settings.
 global:
-  gateway:
-    ## Set to configure single domain name for all services using Go template 
-    host: "activiti-cloud-gateway.{{ .Release.Namespace }}.{{ .Values.global.gateway.domain }}"
+  ## Configure pull secrets for all deployments
+  registryPullSecrets: []
 
-    ## Set enable TLS configuration on all exposed service ingresses
-    http: true
-
-    ## Set to configure gateway domain template using Jx environment expose.config.domain value
-    domain: "CHANGEME"
-
-    ## Configure global annotations for all service ingresses, i.e. 
-    annotations: 
-      certmanager.k8s.io/issuer: letsencrypt-prod
-
-  ## Keycloak configuration
+  # Use Yaml formatted string to add extra environment properties to all deployments, i.e.
+  extraEnv: |
+    - name: SERVER_USEFORWARDHEADERS
+      value: "true"
+    - name: SERVER_TOMCAT_INTERNALPROXIES
+      value: ".*"
+    - name: MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE
+      value: "*"
+    
   keycloak:
-    ## Configure Activiti Keycloak host template, i.e. "activiti-keycloak.{{ .Release.Namespace }}.{{ .Values.global.gateway.domain }}"
-    # if not set, Keycloak Ingress will use gateway host domain, i.e. http(s)://{{ template \"common.gateway-host\" . }}/auth
+    ## Configure Activiti Keycloak host template, i.e. "activiti-keycloak.{{ .Release.Namespace }}.{{  template \"common.gateway-domain\" . }}"
+    # if not set, keycloak deployment is automatically exposed on gaetway host, 
+    # i.e. {{ template \"common.gateway-host\" . }}
     host: ""
 
     ## Set full url to configure external Keycloak, https://my.keycloak.com/auth
-    # if set, Activiti will use external Keycloak deployment configuration 
+    # if not set, keycloak deployment is automatically exposed on gaetway host, 
+    # i.e. http(s)://{{ template \"common.gateway-host\" . }}/auth
     url: ""
 
     ## Configure Keycloak realm
     realm: "activiti"
     resource: "activiti"
     client: "activiti"
+    
+    ## Use Yaml formatted string to add keycloak properties to deployments, i.e.
+    extraEnv: |
+      # - name: KEYCLOAK_USERESOURCEROLEMAPPINGS
+      #   value: "false"
+  gateway:
+    ## Set to configure single domain name for all services, i.e. "activiti-cloud-gateway.{{ .Release.Namespace }}.{{  template \"common.gateway-domain\" . }}"
+    host: "activiti-cloud-gateway.{{ .Release.Namespace }}.{{ template \"common.gateway-domain\" . }}"
+
+    ## Set to false enables HTTPS configuration on all urls 
+    http: "true"
+    
+    ## Set to true to enable automatic TLS for ingress if https is enabled
+    tlsacme: "false"    
+
+    ## Set domain name to expose service ingresses via gateway.host and keycloak.host
+    domain: "REPLACEME"
+
+    ## Configure global annotations for all service ingresses, i.e. Let's Encrypt certificate issuer
+    annotations: 
+      certmanager.k8s.io/issuer: letsencrypt-prod
+
