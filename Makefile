@@ -1,4 +1,4 @@
-CHART_REPO := http://jenkins-x-chartmuseum:8080
+CHART_REPO := $(or $(CHART_REPO), http://jenkins-x-chartmuseum:8080)
 DIR := "env"
 NAMESPACE := "change-me"
 OS := $(shell uname)
@@ -9,16 +9,15 @@ build: clean
 	helm init
 	helm repo add releases ${CHART_REPO}
 	helm repo add jenkins-x http://chartmuseum.jenkins-x.io
-	helm repo add activiti-cloud-helm-charts https://activiti.github.io/activiti-cloud-charts/
+	helm repo add activiti-cloud-helm-charts https://activiti.github.io/activiti-cloud-helm-charts/
 	helm dependency build ${DIR}
 	helm lint ${DIR}
 
-install: 
+install:
+	helm init --upgrade --force-upgrade --wait
 	helm upgrade ${NAMESPACE} ${DIR} --install --namespace ${NAMESPACE} --debug
 
 delete:
 	helm delete --purge ${NAMESPACE}  --namespace ${NAMESPACE}
 
 clean:
-
-
