@@ -5,9 +5,6 @@ pipeline {
   agent {
     label "jenkins-maven"
   }
-  environment {
-    DEPLOY_NAMESPACE = "change-me"
-  }
   stages {
     stage('Validate Environment') {
       steps {
