@@ -43,7 +43,7 @@ global:
     ## Use Yaml formatted string to add keycloak properties to deployments
     extraEnv: |
       # - name: KEYCLOAK_USERESOURCEROLEMAPPINGS
-      #   value: "false" 
+      #   value: "false"
   gateway:
     ## Set to configure single domain name for all services, i.e. "activiti-cloud-gateway.{{ .Release.Namespace }}.{{ .Values.global.gateway.domain }}"
     host: 'gateway.{{ .Release.Namespace }}.{{ template "common.gateway-domain" . }}'
