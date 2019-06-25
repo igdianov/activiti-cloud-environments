@@ -24,7 +24,7 @@ pipeline {
       }
       steps {
         container('maven') {
-          make install
+          sh 'make install'
         }
       }
     }
