@@ -37,18 +37,6 @@ expose:
 
 global:
   gateway:
-    annotations:
-      certmanager.k8s.io/issuer: letsencrypt-prod
-
     domain: REPLACEME # <=== Set value from expose.config.domain key, i.e. 1.2.3.4.nip.io
 
-    host: activiti-cloud-gateway.{{ .Release.Namespace }}.{{ .Values.global.gateway.domain }}
-    http: true
-
-  keycloak:
-    client: activiti
-    host: ""
-    realm: activiti
-    resource: activiti
-    url: ""
 ```    
